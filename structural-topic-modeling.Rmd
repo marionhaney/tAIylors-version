@@ -1,0 +1,17 @@
+---
+title: "Structural Topic Modeling"
+author: "Marion Haney"
+output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  tidy.opts=list(width.cutoff=70),
+  tidy=TRUE
+)
+```
