@@ -14,4 +14,67 @@ knitr::opts_chunk$set(
   tidy.opts=list(width.cutoff=70),
   tidy=TRUE
 )
+library(formatR)
+library(tidyverse)
+# For topic extraction
+library(tidytext)
+library(cmu.textstat)
+library(quanteda)
+library(quanteda.textstats)
+library(stm)
+library(tm)
+library(SnowballC)
+library(pander)
 ```
+
+
+Load the data.
+```{r}
+taylor_swift <- read.csv("data/01-taylor_swift.csv")
+fearless <- read.csv("data/02-fearless_taylors_version.csv")
+speak_now <- read.csv("data/03-speak_now_deluxe_package.csv")
+red <- read.csv("data/04-red_deluxe_edition.csv")
+nineteen89 <- read.csv("data/05-1989_deluxe.csv")
+reputation <- read.csv("data/06-reputation.csv")
+lover <- read.csv("data/07-lover.csv")
+folklore <- read.csv("data/08-folklore_deluxe_version.csv")
+evermore <- read.csv("data/09-evermore_deluxe_version.csv")
+```
+
+
+```{r}
+taylor_swift_long <- taylor_swift %>% unnest_tokens(word, lyric)
+taylor_swift_corpus <- taylor_swift_long$word %>% corpus()
+```
+
+
+```{r}
+taylor_swift_tokens <- taylor_swift_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, remove_numbers = TRUE, 
+         remove_symbols = TRUE, what = "word") %>%
+  tokens_tolower()
+
+taylor_swift_tokens_nostop <- tokens_select(taylor_swift_tokens, 
+                                         pattern = stopwords("en"), 
+                                         selection = "remove")
+
+taylor_swift_dfm <- taylor_swift_tokens_nostop %>%
+  dfm()
+```
+
+
+```{r}
+taylor_swift_stm <- stm(taylor_swift_dfm, K = 6, 
+                        data = docvars(taylor_swift_tokens))
+```
+
+
+```{r}
+#png(filename = "taylor_swift_stm.png")
+plot(taylor_swift_stm)
+#dev.off()
+```
+
+
+
