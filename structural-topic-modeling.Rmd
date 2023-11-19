@@ -10,9 +10,8 @@ output:
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  tidy.opts=list(width.cutoff=70),
-  tidy=TRUE
+  tidy=TRUE,
+  message=FALSE
 )
 library(formatR)
 library(tidyverse)
@@ -42,39 +41,326 @@ evermore <- read.csv("data/09-evermore_deluxe_version.csv")
 ```
 
 
+# ADD TO STOP WORDS
+
 ```{r}
-taylor_swift_long <- taylor_swift %>% unnest_tokens(word, lyric)
-taylor_swift_corpus <- taylor_swift_long$word %>% corpus()
+add <- c("cause", "wanna", "oh", "just", "mm", "like", "eh",
+         "ha", "di", "da", "ooh", "ah", "la", "know", "made",
+         "knew", "now", "gonna", "said", "go", "come", "gave",
+         "yeah")
+stopwords <- c(stopwords("en"), add)
 ```
 
 
+# Taylor Swift
+
 ```{r}
+taylor_swift <- taylor_swift %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+taylor_swift_corpus <- taylor_swift$lyrics %>% corpus()
+
 taylor_swift_tokens <- taylor_swift_corpus %>%
   corpus() %>%
-  tokens(remove_punct = TRUE, remove_numbers = TRUE, 
-         remove_symbols = TRUE, what = "word") %>%
-  tokens_tolower()
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
 
-taylor_swift_tokens_nostop <- tokens_select(taylor_swift_tokens, 
-                                         pattern = stopwords("en"), 
-                                         selection = "remove")
-
-taylor_swift_dfm <- taylor_swift_tokens_nostop %>%
+taylor_swift_dfm <- taylor_swift_tokens %>%
   dfm()
-```
 
-
-```{r}
-taylor_swift_stm <- stm(taylor_swift_dfm, K = 6, 
+taylor_swift_stm <- stm(taylor_swift_dfm, K = 4, 
                         data = docvars(taylor_swift_tokens))
 ```
 
-
 ```{r}
-#png(filename = "taylor_swift_stm.png")
+png(filename = "stm_images/taylor_swift_stm.png")
 plot(taylor_swift_stm)
-#dev.off()
+dev.off()
 ```
 
 
 
+# Fearless
+
+```{r}
+fearless <- fearless %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+fearless_corpus <- fearless$lyrics %>% corpus()
+
+fearless_tokens <- fearless_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+fearless_dfm <- fearless_tokens %>%
+  dfm()
+
+fearless_stm <- stm(fearless_dfm, K = 4, 
+                        data = docvars(fearless_tokens))
+```
+
+```{r}
+png(filename = "stm_images/fearless_stm.png")
+plot(fearless_stm)
+dev.off()
+```
+
+
+
+# Speak Now
+
+```{r}
+speak_now <- speak_now %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+speak_now_corpus <- speak_now$lyrics %>% corpus()
+
+speak_now_tokens <- speak_now_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+speak_now_dfm <- speak_now_tokens %>%
+  dfm()
+
+speak_now_stm <- stm(speak_now_dfm, K = 4, 
+                        data = docvars(speak_now_tokens))
+```
+
+```{r}
+png(filename = "stm_images/speak_now_stm.png")
+plot(speak_now_stm)
+dev.off()
+```
+
+
+
+# Red
+
+```{r}
+red <- red %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+red_corpus <- red$lyrics %>% corpus()
+
+red_tokens <- red_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+red_dfm <- red_tokens %>%
+  dfm()
+
+red_stm <- stm(red_dfm, K = 4, 
+                        data = docvars(red_tokens))
+```
+
+```{r}
+png(filename = "stm_images/red_stm.png")
+plot(red_stm)
+dev.off()
+```
+
+
+
+# 1989
+
+```{r}
+nineteen89 <- nineteen89 %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+nineteen89_corpus <- nineteen89$lyrics %>% corpus()
+
+nineteen89_tokens <- nineteen89_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+nineteen89_dfm <- nineteen89_tokens %>%
+  dfm()
+
+nineteen89_stm <- stm(nineteen89_dfm, K = 4, 
+                        data = docvars(nineteen89_tokens))
+```
+
+```{r}
+png(filename = "stm_images/nineteen89_stm.png")
+plot(nineteen89_stm)
+dev.off()
+```
+
+
+
+# Reputation
+
+```{r}
+reputation <- reputation %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+reputation_corpus <- reputation$lyrics %>% corpus()
+
+reputation_tokens <- reputation_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+reputation_dfm <- reputation_tokens %>%
+  dfm()
+
+reputation_stm <- stm(reputation_dfm, K = 4, 
+                        data = docvars(reputation_tokens))
+```
+
+```{r}
+png(filename = "stm_images/reputation_stm.png")
+plot(reputation_stm)
+dev.off()
+```
+
+
+
+# Lover
+
+```{r}
+lover <- lover %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+lover_corpus <- lover$lyrics %>% corpus()
+
+lover_tokens <- lover_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+lover_dfm <- lover_tokens %>%
+  dfm()
+
+lover_stm <- stm(lover_dfm, K = 4, 
+                        data = docvars(lover_tokens))
+```
+
+```{r}
+png(filename = "stm_images/lover_stm.png")
+plot(lover_stm)
+dev.off()
+```
+
+
+
+# Folklore
+
+```{r}
+folklore <- folklore %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+folklore_corpus <- folklore$lyrics %>% corpus()
+
+folklore_tokens <- folklore_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+folklore_dfm <- folklore_tokens %>%
+  dfm()
+
+folklore_stm <- stm(folklore_dfm, K = 4, 
+                        data = docvars(folklore_tokens))
+```
+
+```{r}
+png(filename = "stm_images/folklore_stm.png")
+plot(folklore_stm)
+dev.off()
+```
+
+
+
+# Evermore
+
+```{r}
+evermore <- evermore %>% 
+  unnest_tokens(word, lyric) %>%
+  group_by(track_title) %>%
+  summarize(lyrics = paste0(word, collapse = " "))
+
+evermore_corpus <- evermore$lyrics %>% corpus()
+
+evermore_tokens <- evermore_corpus %>%
+  corpus() %>%
+  tokens(remove_punct = TRUE, 
+         remove_numbers = TRUE, 
+         remove_symbols = TRUE, 
+         what = "word") %>%
+  tokens_tolower() %>%
+  tokens_select(pattern = stopwords,
+                selection = "remove")
+
+evermore_dfm <- evermore_tokens %>%
+  dfm()
+
+evermore_stm <- stm(evermore_dfm, K = 4, 
+                        data = docvars(evermore_tokens))
+```
+
+```{r}
+png(filename = "stm_images/evermore_stm.png")
+plot(evermore_stm)
+dev.off()
+```
