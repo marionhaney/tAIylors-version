@@ -46,7 +46,7 @@ evermore <- read.csv("data/09-evermore_deluxe_version.csv")
 add <- c("cause", "wanna", "oh", "just", "mm", "like", "eh",
          "ha", "di", "da", "ooh", "ah", "la", "know", "made",
          "knew", "now", "gonna", "said", "go", "come", "gave",
-         "yeah")
+         "yeah", "got")
 stopwords <- c(stopwords("en"), add)
 ```
 
