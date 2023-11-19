@@ -10,8 +10,7 @@ output:
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  tidy=TRUE,
-  message=FALSE
+  tidy=TRUE
 )
 library(formatR)
 library(tidyverse)
