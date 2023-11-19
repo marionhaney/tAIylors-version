@@ -39,6 +39,35 @@ folklore <- read.csv("data/08-folklore_deluxe_version.csv")
 evermore <- read.csv("data/09-evermore_deluxe_version.csv")
 ```
 
+# Length of Corpus
+
+```{r}
+taylor_swift <- taylor_swift %>% unnest_tokens(word, lyric)
+fearless <- fearless %>% unnest_tokens(word, lyric)
+speak_now <- speak_now %>% unnest_tokens(word, lyric)
+red <- red %>% unnest_tokens(word, lyric)
+nineteen89 <- nineteen89 %>% unnest_tokens(word, lyric)
+reputation <- reputation %>% unnest_tokens(word, lyric)
+lover <- lover %>% unnest_tokens(word, lyric)
+folklore <- folklore %>% unnest_tokens(word, lyric)
+evermore <- evermore %>% unnest_tokens(word, lyric)
+
+# How many tokens are in our corpus?
+lengths <- c(nrow(taylor_swift),
+             nrow(fearless),
+             nrow(speak_now),
+             nrow(red),
+             nrow(nineteen89),
+             nrow(reputation),
+             nrow(lover),
+             nrow(folklore),
+             nrow(evermore))
+        
+print(sum(lengths))
+print(min(lengths))
+print(max(lengths))
+```
+
 
 # ADD TO STOP WORDS
 
@@ -54,8 +83,7 @@ stopwords <- c(stopwords("en"), add)
 # Taylor Swift
 
 ```{r}
-taylor_swift <- taylor_swift %>% 
-  unnest_tokens(word, lyric) %>%
+taylor_swift <- taylor_swift %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -89,8 +117,7 @@ dev.off()
 # Fearless
 
 ```{r}
-fearless <- fearless %>% 
-  unnest_tokens(word, lyric) %>%
+fearless <- fearless %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -125,7 +152,6 @@ dev.off()
 
 ```{r}
 speak_now <- speak_now %>% 
-  unnest_tokens(word, lyric) %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -160,7 +186,6 @@ dev.off()
 
 ```{r}
 red <- red %>% 
-  unnest_tokens(word, lyric) %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -195,7 +220,6 @@ dev.off()
 
 ```{r}
 nineteen89 <- nineteen89 %>% 
-  unnest_tokens(word, lyric) %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -230,7 +254,6 @@ dev.off()
 
 ```{r}
 reputation <- reputation %>% 
-  unnest_tokens(word, lyric) %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -265,7 +288,6 @@ dev.off()
 
 ```{r}
 lover <- lover %>% 
-  unnest_tokens(word, lyric) %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -300,7 +322,6 @@ dev.off()
 
 ```{r}
 folklore <- folklore %>% 
-  unnest_tokens(word, lyric) %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
@@ -335,7 +356,6 @@ dev.off()
 
 ```{r}
 evermore <- evermore %>% 
-  unnest_tokens(word, lyric) %>%
   group_by(track_title) %>%
   summarize(lyrics = paste0(word, collapse = " "))
 
