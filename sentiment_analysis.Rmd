@@ -1,0 +1,130 @@
+---
+title: "cbe2"
+author: "Divya Rao"
+date: "2023-11-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# sentiment analysis
+```
+
+```{r}
+#load data
+library(tidyverse)
+taylor_swift <- read_csv("data/01-taylor_swift.csv")
+fearless <- read_csv("data/02-fearless_taylors_version.csv")
+speak_now <- read_csv("data/03-speak_now_deluxe_package.csv")
+red <- read_csv("data/04-red_deluxe_edition.csv")
+nineteen <- read_csv("data/05-1989_deluxe.csv")
+reputation <- read_csv("data/06-reputation.csv")
+lover <- read_csv("data/07-lover.csv")
+folklore <- read_csv("data/08-folklore_deluxe_version.csv")
+evermore <- read_csv("data/09-evermore_deluxe_version.csv")
+```
+```{r}
+library(cmu.textstat) 
+library(tidyverse) 
+library(syuzhet)
+
+# ALBUM: TAYLOR SWIFT 
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+taylor_swift_cleaned <- str_squish(taylor_swift)
+# chunk the album into sentences
+taylor_swift_sentences <- get_sentences(taylor_swift_cleaned)
+# calculate and return sentiment scores
+taylor_swift_sentiment <- get_sentiment(taylor_swift_cleaned)
+print(taylor_swift_sentiment)
+
+# ALBUM: FEARLESS
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+fearless_cleaned <- str_squish(fearless)
+# chunk the album into sentences
+fearless_sentences <- get_sentences(fearless_cleaned)
+# calculate and return sentiment scores
+fearless_sentiment <- get_sentiment(fearless_cleaned)
+print(fearless_sentiment)
+
+# ALBUM: SPEAK NOW
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+speak_now_cleaned <- str_squish(speak_now)
+# chunk the album into sentences
+speak_now_sentences <- get_sentences(speak_now_cleaned)
+# calculate and return sentiment scores
+speak_now_sentiment <- get_sentiment(speak_now_cleaned)
+print(speak_now_sentiment)
+
+# ALBUM: RED
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+red_cleaned <- str_squish(red)
+# chunk the album into sentences
+red_sentences <- get_sentences(red_cleaned)
+# calculate and return sentiment scores
+red_sentiment <- get_sentiment(red_cleaned)
+print(red_sentiment)
+
+# ALBUM: NINETEEN
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+nineteen_cleaned <- str_squish(nineteen)
+# chunk the album into sentences
+nineteen_sentences <- get_sentences(nineteen_cleaned)
+# calculate and return sentiment scores
+nineteen_sentiment <- get_sentiment(nineteen_cleaned)
+print(nineteen_sentiment)
+
+# ALBUM: REPUTATION
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+reputation_cleaned <- str_squish(reputation)
+# chunk the album into sentences
+reputation_sentences <- get_sentences(reputation_cleaned)
+# calculate and return sentiment scores
+reputation_sentiment <- get_sentiment(reputation_cleaned)
+print(reputation_sentiment)
+
+# ALBUM: LOVER
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+lover_cleaned <- str_squish(lover)
+# chunk the album into sentences
+lover_sentences <- get_sentences(lover_cleaned)
+# calculate and return sentiment scores
+lover_sentiment <- get_sentiment(lover_cleaned)
+print(lover_sentiment)
+
+# ALBUM: FOLKLORE
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+folklore_cleaned <- str_squish(folklore)
+# chunk the album into sentences
+folklore_sentences <- get_sentences(folklore_cleaned)
+# calculate and return sentiment scores
+folklore_sentiment <- get_sentiment(folklore_cleaned)
+print(folklore_sentiment)
+
+# ALBUM: EVERMORE
+# str_squish() is a useful function from readr for getting rid of 
+# extra spaces, carriage returns, etc.
+evermore_cleaned <- str_squish(evermore)
+# chunk the album into sentences
+evermore_sentences <- get_sentences(evermore_cleaned)
+# calculate and return sentiment scores
+evermore_sentiment <- get_sentiment(evermore_cleaned)
+print(evermore_sentiment)
+```
+
+
+
+
+
+
+
+
+
+
