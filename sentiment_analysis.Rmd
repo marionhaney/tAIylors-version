@@ -1,7 +1,7 @@
 ---
-title: "cbe2"
+title: "Sentiment Analysis for CBE #2"
 author: "Divya Rao"
-date: "2023-11-12"
+date: "2023-11-19"
 output: html_document
 ---
 
@@ -36,7 +36,8 @@ taylor_swift_cleaned <- str_squish(taylor_swift)
 taylor_swift_sentences <- get_sentences(taylor_swift_cleaned)
 # calculate and return sentiment scores
 taylor_swift_sentiment <- get_sentiment(taylor_swift_cleaned)
-print(taylor_swift_sentiment)
+mean_taylor_swift_sentiment <- mean(taylor_swift_sentiment)
+print(mean_taylor_swift_sentiment)
 
 # ALBUM: FEARLESS
 # str_squish() is a useful function from readr for getting rid of 
@@ -46,7 +47,8 @@ fearless_cleaned <- str_squish(fearless)
 fearless_sentences <- get_sentences(fearless_cleaned)
 # calculate and return sentiment scores
 fearless_sentiment <- get_sentiment(fearless_cleaned)
-print(fearless_sentiment)
+mean_fearless_sentiment <- mean(fearless_sentiment)
+print(mean_fearless_sentiment)
 
 # ALBUM: SPEAK NOW
 # str_squish() is a useful function from readr for getting rid of 
@@ -56,7 +58,8 @@ speak_now_cleaned <- str_squish(speak_now)
 speak_now_sentences <- get_sentences(speak_now_cleaned)
 # calculate and return sentiment scores
 speak_now_sentiment <- get_sentiment(speak_now_cleaned)
-print(speak_now_sentiment)
+mean_speak_now_sentiment <- mean(speak_now_sentiment)
+print(mean_speak_now_sentiment)
 
 # ALBUM: RED
 # str_squish() is a useful function from readr for getting rid of 
@@ -66,7 +69,8 @@ red_cleaned <- str_squish(red)
 red_sentences <- get_sentences(red_cleaned)
 # calculate and return sentiment scores
 red_sentiment <- get_sentiment(red_cleaned)
-print(red_sentiment)
+mean_red_sentiment <- mean(red_sentiment)
+print(mean_red_sentiment)
 
 # ALBUM: NINETEEN
 # str_squish() is a useful function from readr for getting rid of 
@@ -76,7 +80,8 @@ nineteen_cleaned <- str_squish(nineteen)
 nineteen_sentences <- get_sentences(nineteen_cleaned)
 # calculate and return sentiment scores
 nineteen_sentiment <- get_sentiment(nineteen_cleaned)
-print(nineteen_sentiment)
+mean_nineteen_sentiment <- mean(nineteen_sentiment)
+print(mean_nineteen_sentiment)
 
 # ALBUM: REPUTATION
 # str_squish() is a useful function from readr for getting rid of 
@@ -86,7 +91,8 @@ reputation_cleaned <- str_squish(reputation)
 reputation_sentences <- get_sentences(reputation_cleaned)
 # calculate and return sentiment scores
 reputation_sentiment <- get_sentiment(reputation_cleaned)
-print(reputation_sentiment)
+mean_reputation_sentiment <- mean(reputation_sentiment)
+print(mean_reputation_sentiment)
 
 # ALBUM: LOVER
 # str_squish() is a useful function from readr for getting rid of 
@@ -96,7 +102,8 @@ lover_cleaned <- str_squish(lover)
 lover_sentences <- get_sentences(lover_cleaned)
 # calculate and return sentiment scores
 lover_sentiment <- get_sentiment(lover_cleaned)
-print(lover_sentiment)
+mean_lover_sentiment <- mean(lover_sentiment)
+print(mean_lover_sentiment)
 
 # ALBUM: FOLKLORE
 # str_squish() is a useful function from readr for getting rid of 
@@ -106,7 +113,8 @@ folklore_cleaned <- str_squish(folklore)
 folklore_sentences <- get_sentences(folklore_cleaned)
 # calculate and return sentiment scores
 folklore_sentiment <- get_sentiment(folklore_cleaned)
-print(folklore_sentiment)
+mean_folklore_sentiment <- mean(folklore_sentiment)
+print(mean_folklore_sentiment)
 
 # ALBUM: EVERMORE
 # str_squish() is a useful function from readr for getting rid of 
@@ -116,15 +124,8 @@ evermore_cleaned <- str_squish(evermore)
 evermore_sentences <- get_sentences(evermore_cleaned)
 # calculate and return sentiment scores
 evermore_sentiment <- get_sentiment(evermore_cleaned)
-print(evermore_sentiment)
+mean_evermore_sentiment <- mean(evermore_sentiment)
+print(mean_evermore_sentiment)
 ```
-
-
-
-
-
-
-
-
 
 
