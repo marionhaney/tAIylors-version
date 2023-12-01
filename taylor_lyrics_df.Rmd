@@ -1,0 +1,59 @@
+---
+title: "taylor_lyrics_df"
+author: "Tilina Alzaben"
+date: "2023-12-01"
+output: html_document
+--- 
+
+```{r, message = FALSE}
+# Install the necessary packages if not already installed
+install.packages("purrr")
+install.packages("dplyr")
+
+# Load the necessary libraries
+library(purrr)
+library(dplyr)
+```
+
+```{r, message = FALSE}
+# Read all CSV files and combine them into a single data frame using map_df'
+files <- list.files(path = "data", pattern = "\\.csv$", full.names = TRUE)
+combined_data <- map_df(files, read.csv)
+```
+
+```{r, message = FALSE}
+# Group the combined data by album_name and track_title
+# Create a new column 'chunk' to identify chunks of 3 lines based on the 'line' column
+# Group by album_name, track_title, and chunk, then summarize to combine lyrics into one string
+combined_data <- combined_data %>%
+  group_by(album_name, track_title) %>%
+  mutate(chunk = ceiling(line / 3)) %>%
+  group_by(album_name, track_title, chunk) %>%
+  summarize(combined_lyrics = paste0(lyric, collapse = " ")) %>%
+  ungroup()
+
+# Display the first few rows of the data frame
+head(combined_data)
+```
+
+```{r}
+# Use the recode function to rename the albums 
+combined_data <- combined_data %>%
+  mutate(album_name = recode(album_name,
+    "1989 (Deluxe)"                = "nineteen89",
+    "Fearless (Taylor’s Version)"  = "fearless",
+    "Lover"                        = "lover",
+    "Red (Deluxe Edition)"         = "red",
+    "Speak Now (Deluxe)"           = "speak_now",
+    "Taylor Swift"                 = "taylor_swift",
+    "evermore (deluxe version)"    = "evermore",
+    "folklore (deluxe version)"    = "folklore",
+    "reputation"                   = "reputation"
+  ))
+
+# Print out all unique album names
+unique_albums <- unique(combined_data$album_name)
+print(unique_albums)
+```
+
+
