@@ -40,15 +40,15 @@ head(combined_data)
 # Use the recode function to rename the albums 
 combined_data <- combined_data %>%
   mutate(album_name = recode(album_name,
-    "1989 (Deluxe)"                = "nineteen89",
-    "Fearless (Taylor’s Version)"  = "fearless",
-    "Lover"                        = "lover",
-    "Red (Deluxe Edition)"         = "red",
-    "Speak Now (Deluxe)"           = "speak_now",
-    "Taylor Swift"                 = "taylor_swift",
-    "evermore (deluxe version)"    = "evermore",
-    "folklore (deluxe version)"    = "folklore",
-    "reputation"                   = "reputation"
+    "1989 (Deluxe)"                = 4,
+    "Fearless (Taylor’s Version)"  = 1,
+    "Lover"                        = 6,
+    "Red (Deluxe Edition)"         = 3,
+    "Speak Now (Deluxe)"           = 2,
+    "Taylor Swift"                 = 0,
+    "evermore (deluxe version)"    = 8,
+    "folklore (deluxe version)"    = 7,
+    "reputation"                   = 5
   ))
 
 # Print out all unique album names
@@ -58,8 +58,8 @@ print(unique_albums)
 
 ```{r}
 # Filter the data for fine-tuning BERT and GPT2
-fine_tune_data <- subset(combined_data, select = c(1, 4))
-names(fine_tune_data) <- c("era", "lyrics")
+fine_tune_data <- na.omit(subset(combined_data, select = c(1, 4)))
+names(fine_tune_data) <- c("label", "text")
 write.csv(fine_tune_data, "data/fine_tune_data.csv")
 ```
 
