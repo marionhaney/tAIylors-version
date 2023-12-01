@@ -4,3 +4,4 @@
 .Ruserdata
 tAIylors-version.Rproj
 .DS_Store
+data/fine_tune_data.csv
