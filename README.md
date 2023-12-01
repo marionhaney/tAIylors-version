@@ -24,11 +24,7 @@ cd taylor-swift-corpus
 The data directory contains the data files used in the analysis, from [Kaggle](https://www.kaggle.com/datasets/thespacefreak/taylor-swift-song-lyrics-all-albums). 
 
 ## Structural Topic Modeling
-The structural-topic-modeling.Rmd file contains the code for structural topic modeling on the Taylor Swift corpus. 
-
-It outputs insights into the topics present in the lyrics.
+The structural-topic-modeling.Rmd file contains the code for structural topic modeling on the Taylor Swift corpus. It outputs insights into the topics present in the lyrics.
 
 ## Sentiment Analysis
-The sentiment_analysis.Rmd file focuses on sentiment analysis. 
-
-It calculates mean sentiment scores for each album, providing an emotional perspective on Taylor Swift's discography.
+The sentiment_analysis.Rmd file focuses on sentiment analysis. It calculates mean sentiment scores for each album, providing an emotional perspective on Taylor Swift's discography.
