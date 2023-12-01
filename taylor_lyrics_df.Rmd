@@ -56,4 +56,7 @@ unique_albums <- unique(combined_data$album_name)
 print(unique_albums)
 ```
 
+```{r}
+# Filter the data for fine-tuning BERT and GPT2
+```
 
