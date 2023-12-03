@@ -121,7 +121,7 @@ print(unique_albums)
 
 ```{r}
 # Filter the data for fine-tuning BERT and GPT2
-fine_tune_data <- na.omit(subset(combined_data, select = c(1, 4)))
-names(fine_tune_data) <- c("label", "text")
-write.csv(fine_tune_data, "data/fine_tune_data_genre.csv")
+fine_tune_data_genre <- na.omit(subset(combined_data_genre, select = c(1, 4)))
+names(fine_tune_data_genre) <- c("label", "text")
+write.csv(fine_tune_data_genre, "data/fine_tune_data_genre.csv")
 ```
