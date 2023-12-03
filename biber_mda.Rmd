@@ -1,0 +1,88 @@
+---
+title: "Untitled"
+author: "Tilina Alzaben"
+date: "2023-11-16"
+output: html_document
+---
+
+```{r}
+#install.packages("udpipe")
+library(udpipe)
+library(dplyr)
+library(purrr)
+library(tidyverse)
+library(quanteda)
+library(quanteda.textstats)
+library(nFactors)
+```
+
+```{r}
+files <- list.files(path = "data", pattern = "\\.csv$", full.names = TRUE)
+combined_data <- map_df(files, read.csv)
+```
+
+
+```{r, message = FALSE}
+combined_data <- bind_rows(lapply(files, read.csv)) %>% 
+  group_by(album_name, track_title) %>%
+  summarize(lyrics = paste(lyric, collapse = " ")) %>% 
+  mutate(album_name = tolower(album_name)) %>%
+  select(album_name, track_title, lyrics)
+
+colnames(combined_data)[colnames(combined_data) == "track_title"] <- "doc_id"
+
+print(combined_data)
+```
+
+```{r}
+#udpipe_download_model(language = "english")
+ud_model <- udpipe_load_model("english-ewt-ud-2.5-191206.udpipe")
+micusp_prsd <- udpipe_annotate(ud_model, x = combined_data$lyrics, doc_id = combined_data$doc_id)
+micusp_prsd <- data.frame(micusp_prsd, stringsAsFactors = F)
+df_biber <- biber_udpipe(micusp_prsd)
+```
+
+```{r}
+bc <- df_biber %>%
+  left_join(dplyr::select(combined_data, doc_id, album_name)) %>%
+  mutate(album_name = as.factor(album_name)) %>%
+  column_to_rownames("doc_id") %>%
+  dplyr::select(album_name, everything())
+```
+
+```{r}
+screeplot_mda(bc)
+bc_mda <- mda_loadings(bc, n_factors = 3)
+knitr::kable(attr(bc_mda, 'loadings'), caption = "Factor loadings", booktabs = T, linesep = "", digits = 2)
+```
+
+```{r}
+mda.biber::stickplot_mda(bc_mda, n_factor = 1)
+```
+
+```{r}
+mda.biber::heatmap_mda(bc_mda, n_factor = 1)
+```
+
+```{r}
+bc_mda %>%
+  ggplot(aes(x = Factor1, y = Factor3, color = as.factor(group))) +
+  geom_point() +
+  theme_bw()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
