@@ -5,11 +5,13 @@ date: "2023-12-01"
 output: html_document
 --- 
 
-```{r, message = FALSE}
+```{r, message=FALSE}
 # Install the necessary packages if not already installed
 install.packages("purrr")
 install.packages("dplyr")
+```
 
+```{r, message=FALSE}
 # Load the necessary libraries
 library(purrr)
 library(dplyr)
@@ -23,11 +25,11 @@ combined_data <- map_df(files, read.csv)
 
 ```{r, message = FALSE}
 # Group the combined data by album_name and track_title
-# Create a new column 'chunk' to identify chunks of 3 lines based on the 'line' column
+# Create a new column 'chunk' to identify chunks of 4 lines based on the 'line' column
 # Group by album_name, track_title, and chunk, then summarize to combine lyrics into one string
 combined_data <- combined_data %>%
   group_by(album_name, track_title) %>%
-  mutate(chunk = ceiling(line / 3)) %>%
+  mutate(chunk = ceiling(line / 4)) %>%
   group_by(album_name, track_title, chunk) %>%
   summarize(combined_lyrics = paste0(lyric, collapse = " ")) %>%
   ungroup()
