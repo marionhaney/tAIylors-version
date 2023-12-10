@@ -4,6 +4,4 @@
 .Ruserdata
 tAIylors-version.Rproj
 .DS_Store
-data/fine_tune_data_all_eras.csv
-data/fine_tune_data_biber.csv
-data/fine_tune_data_genre.csv
+fine_tuning_data/

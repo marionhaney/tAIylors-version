@@ -23,6 +23,8 @@ library(stm)
 library(tm)
 library(SnowballC)
 library(pander)
+library(dplyr)
+library(purrr)
 ```
 
 
@@ -37,6 +39,11 @@ reputation <- read.csv("data/06-reputation.csv")
 lover <- read.csv("data/07-lover.csv")
 folklore <- read.csv("data/08-folklore_deluxe_version.csv")
 evermore <- read.csv("data/09-evermore_deluxe_version.csv")
+```
+
+```{r}
+files <- list.files(path = "data", pattern = "\\.csv$", full.names = TRUE)
+combined_data <- map_df(files, read.csv)
 ```
 
 # Length of Corpus
