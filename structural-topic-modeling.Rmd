@@ -97,9 +97,9 @@ What is the average length of each song?
 ```{r}
 combined_whole_track <- combined_data %>%
   group_by(track_title) %>%
-  #summarize(lyrics = paste0(lyric, collapse = " "))
-  summarize(track_length = nchar(paste0(lyric, collapse = " ")), na.rm = TRUE)
-print(paste("Avg. track length in number chars: ", 
+  summarize(track_length = sum(str_count(lyric, "\\S+")), na.rm = TRUE)
+
+print(paste("Avg. track length in number of words: ", 
             mean(combined_whole_track$track_length)))
 ```
 
