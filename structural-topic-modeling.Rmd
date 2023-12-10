@@ -46,7 +46,9 @@ files <- list.files(path = "data", pattern = "\\.csv$", full.names = TRUE)
 combined_data <- map_df(files, read.csv)
 ```
 
-# Length of Corpus
+# Corpus stats
+
+How many tokens are in our corpus?
 
 ```{r}
 taylor_swift <- taylor_swift %>% unnest_tokens(word, lyric)
@@ -73,6 +75,32 @@ lengths <- c(nrow(taylor_swift),
 print(sum(lengths))
 print(min(lengths))
 print(max(lengths))
+```
+
+How many songs are on each album?
+
+```{r}
+albums <- list(taylor_swift, fearless, speak_now, red, nineteen89, 
+            reputation, lover, folklore, evermore)
+track_ns <- 0
+for (al in albums) {
+  print(unique(al$album_name, na.rm = TRUE))
+  max_track_n <- max(al$track_n, na.rm = TRUE)
+  print(max_track_n)
+  track_ns <- track_ns + max_track_n
+}
+print(paste("Avg. number of tracks on each album: ", track_ns / length(albums)))
+```
+
+What is the average length of each song?
+
+```{r}
+combined_whole_track <- combined_data %>%
+  group_by(track_title) %>%
+  #summarize(lyrics = paste0(lyric, collapse = " "))
+  summarize(track_length = nchar(paste0(lyric, collapse = " ")), na.rm = TRUE)
+print(paste("Avg. track length in number chars: ", 
+            mean(combined_whole_track$track_length)))
 ```
 
 
