@@ -127,5 +127,19 @@ evermore_sentiment <- get_sentiment(evermore_cleaned)
 mean_evermore_sentiment <- mean(evermore_sentiment)
 print(mean_evermore_sentiment)
 ```
+```{r}
+ai <- read_csv("data/ai_generated/AI_album.csv")
+# chunk the album into sentences
+ai_cleaned <- str_squish(ai)
+ai_sentences <- get_sentences(ai_cleaned)
+# calculate and return sentiment scores
+ai_sentiment <- get_sentiment(ai_cleaned)
+mean_ai_sentiment <- mean(ai_sentiment)
+print(mean_ai_sentiment)
+```
+
+
+
+
 
 
