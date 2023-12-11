@@ -137,7 +137,39 @@ ai_sentiment <- get_sentiment(ai_cleaned)
 mean_ai_sentiment <- mean(ai_sentiment)
 print(mean_ai_sentiment)
 ```
+```{r}
+library(ggplot2)
+album_data <- data.frame(
+  Album = c("Taylor Swift", "Fearless", "Speak Now", "Red", "1989", "Reputation", "Lover", "Folklore", "Evermore"),
+  MeanSentiment = c(
+    mean_taylor_swift_sentiment,
+    mean_fearless_sentiment,
+    mean_speak_now_sentiment,
+    mean_red_sentiment,
+    mean_nineteen_sentiment,
+    mean_reputation_sentiment,
+    mean_lover_sentiment,
+    mean_folklore_sentiment,
+    mean_evermore_sentiment
+  )
+)
 
+album_order <- c("Taylor Swift", "Fearless", "Speak Now", "Red", "1989", "Reputation", "Lover", "Folklore", "Evermore")
+
+album_data$Album <- factor(album_data$Album, levels = album_order)
+
+ggplot(album_data, aes(x = Album, y = MeanSentiment, group=1)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Time Series of Album Sentiment",
+    x = "Album",
+    y = "Average Sentiment Score"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme_bw() +
+  theme(panel.grid.major = element_blank())
+```
 
 
 
