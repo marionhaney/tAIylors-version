@@ -140,7 +140,7 @@ print(mean_ai_sentiment)
 ```{r}
 library(ggplot2)
 album_data <- data.frame(
-  Album = c("Taylor Swift", "Fearless", "Speak Now", "Red", "1989", "Reputation", "Lover", "Folklore", "Evermore"),
+  Album = c("Taylor Swift", "Fearless", "Speak Now", "Red", "1989", "Reputation", "Lover", "Folklore", "Evermore", "AI-Generated"),
   MeanSentiment = c(
     mean_taylor_swift_sentiment,
     mean_fearless_sentiment,
@@ -150,11 +150,12 @@ album_data <- data.frame(
     mean_reputation_sentiment,
     mean_lover_sentiment,
     mean_folklore_sentiment,
-    mean_evermore_sentiment
+    mean_evermore_sentiment,
+    mean_ai_sentiment
   )
 )
 
-album_order <- c("Taylor Swift", "Fearless", "Speak Now", "Red", "1989", "Reputation", "Lover", "Folklore", "Evermore")
+album_order <- c("Taylor Swift", "Fearless", "Speak Now", "Red", "1989", "Reputation", "Lover", "Folklore", "Evermore", "AI-Generated")
 
 album_data$Album <- factor(album_data$Album, levels = album_order)
 
