@@ -1,30 +1,22 @@
 # tAIylor's Version
 
-This project involves the creation and analysis of a Taylor Swift corpus with the training of a BERT model. The primary objectives are to explore sentiment and topics within Taylor Swift's different albums, or eras, and to generate lyrics in her distinctive style based on a prompted era.
-
-## Dependencies
-Before running the project, ensure you have the following installed:
-- R (version 4.3.X)
-- RStudio
-
-## Installation
-Clone the repository to your local machine:
-
-`
-git clone https://github.com/talzab/taylor-swift-corpus.git
-`
-
-Navigate to the project directory:
-
-`
-cd taylor-swift-corpus
-`
+This project involves analysis of a Taylor Swift corpus using structural topic modeling, Biber MDA and PCA, and sentiment analysis. After language analysis of Taylor Swift lyrics, a BERT model was fine-tuned to predict the album from 3 lines of lyrics. Next, a GPT-2 model was fine-tuned in attempt to create a "Taylor Swift AI"-- _tAIylor's version_. This AI generates song lyrics in Taylor Swift's style given a textual prompt. We generated an AI album then analyzed this album using the same language analysis techniques.
 
 ## Data
-The data directory contains the data files used in the analysis, from [Kaggle](https://www.kaggle.com/datasets/thespacefreak/taylor-swift-song-lyrics-all-albums). 
+The data directory contains the data files used in the analysis, from [Kaggle](https://www.kaggle.com/datasets/thespacefreak/taylor-swift-song-lyrics-all-albums). It also containes the _tAIylor's version_ album.
+
+The taylor_lyrics_df.Rmd file contains data preparation code for fine-tuning of LLMs.
+
+## Model Notebooks
+Two Jupyter notebooks are included in the model_notebooks directory. These contain the Python code used to fine-tune BERT for classification and GPT-2 for generation tasks. Google Colab was used to provide GPU computing.
 
 ## Structural Topic Modeling
 The structural-topic-modeling.Rmd file contains the code for structural topic modeling on the Taylor Swift corpus. It outputs insights into the topics present in the lyrics.
 
 ## Sentiment Analysis
-The sentiment_analysis.Rmd file focuses on sentiment analysis. It calculates mean sentiment scores for each album, providing an emotional perspective on Taylor Swift's discography.
+The sentiment_analysis.Rmd file focuses on sentiment analysis. It calculates mean sentiment scores for each album, providing an emotional perspective on Taylor Swift's discography as well as a time series analysis.
+
+## Biber MDA
+The biber_mda.Rmd file calculates similarity between albums based on Biber's MDA principles and uses PCA analysis.
+
+
