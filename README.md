@@ -19,4 +19,7 @@ The sentiment_analysis.Rmd file focuses on sentiment analysis. It calculates mea
 ## Biber MDA
 The biber_mda.Rmd file calculates similarity between albums based on Biber's MDA principles and uses PCA analysis.
 
+## tAIylor's version Paper
+The tAIylors_version_paper.pdf file contains the official write-up for F23 36-668 Text Analysis class.
+
 
