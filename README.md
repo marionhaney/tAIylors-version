@@ -2,6 +2,8 @@
 
 This project involves analysis of a Taylor Swift corpus using structural topic modeling, Biber MDA and PCA, and sentiment analysis. After language analysis of Taylor Swift lyrics, a BERT model was fine-tuned to predict the album from 3 lines of lyrics. Next, a GPT-2 model was fine-tuned in attempt to create a "Taylor Swift AI"-- _tAIylor's version_. This AI generates song lyrics in Taylor Swift's style given a textual prompt. We generated an AI album then analyzed this album using the same language analysis techniques.
 
+Our use of a LLM to generate a certain style of song lyrics is purely experimental. We do not believe that AI will replace songwriters. This portion of the project was meant to test LLMs for a creative task under computing restrictions and observe the result.
+
 ## Data
 The data directory contains the data files used in the analysis, from [Kaggle](https://www.kaggle.com/datasets/thespacefreak/taylor-swift-song-lyrics-all-albums). It also containes the _tAIylor's version_ album.
 
